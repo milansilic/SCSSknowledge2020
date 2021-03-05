@@ -1,0 +1,372 @@
+*{margin:0px; padding:0px; box-sizing:border-box;}
+$cw:#fff;
+$cg:#d6d6d6;
+$c1:#CD6799;   // jos tamnija
+$c1L2:#d66b9f; // svetlija
+$c1L4:#e070a6; // naj svetlija
+$ff3:'Merriweather Sans';
+$ff4:'Merriweather Sans';
+$ff5:'Caveat';
+$ff6:'Merriweather Sans';
+$ff7:'Aleo';
+$minMabileL:576px;
+$minTablet:768px;
+$minDesktop:992px;
+$minLargeScreen:1200px;
+$borderRad1:6px;
+.cCod2{color: #569cd6}
+.codVal1{color: #ce9178;}
+.codVal2{color: #b5cea8;}
+.codVar{color: #80ddff;}
+.codMix1{color:#d17dca;}
+.codMix3{color:#dcdcaa;}
+.codSelTg1{color: #d7ba7d;}
+.codProp{color: #99ddff; font-style: italic;}
+.codMedia{color:#ac80ff;}
+.fsSM{font-size: .62em;}
+.disBl{display: block !important;}
+.text1{
+    font-family: $ff7;
+    font-size: calc(13px + 1vw);
+    line-height: calc(18px + 1.8vw);
+    text-align: justify;
+    color: $cw;
+    @media only screen and (min-width:$minTablet){
+        font-size: calc(14px + .6vw);
+        line-height: calc(20px + 1vw);
+    }
+    @media only screen and (min-width:$minDesktop){
+        font-size: 20px;
+    }
+}
+@mixin fl($flDi, $juCo, $alIt, $wr){
+    display: flex;
+    flex-direction: $flDi;
+    justify-content: $juCo;
+    align-items: $alIt;
+    flex-wrap: $wr;
+}
+@mixin tran($prop, $dur, $timing){
+    -webkit-transition: $prop $dur $timing;
+    -moz-transition: $prop $dur $timing;
+    -o-transition: $prop $dur $timing;
+    transition: $prop $dur $timing;
+}
+html{scroll-behavior:smooth;}
+body{
+    background: $c1L2 !important;
+    text-align: center;
+    position: relative;
+}
+.hdr1{
+    background:$c1;
+    display: flex;
+    justify-content: space-between;
+    #lgSass{
+        padding: 20px 2vw;
+        @media only screen and (min-width:$minTablet){
+            width:15.2%;
+            order: 3;
+        }
+        a{
+            display: inline-block;
+            vertical-align: middle;
+            margin: 0px .4vw;
+            img{width: 32px;}
+        }
+    }
+    #lg1{
+        display: block;
+        padding: 15px 0 0 0;
+        @media only screen and (min-width:$minTablet){
+            width:15.2%;
+            order: 1;
+        }
+        a{
+            @include tran(margin-top, .3, ease);
+            @media only screen and (min-width:$minTablet){
+                position: fixed;
+                -webkit-transform: translateX(-50%);
+                transform: translateX(-50%)
+            }
+            img{
+                -webkit-transition: all .2s ease-out;
+                -moz-transition: all .2s ease-out;
+                -o-transition: all .2s ease-out;
+                transition: all .2s ease-out;
+            }
+        }
+    }
+    #ham{
+        padding: 20px 4vw;   
+        @media only screen and (min-width:$minTablet){
+            display: none;
+        }
+        img{
+            width: 32px;
+            cursor: pointer;
+        }
+    }
+}
+#aside3{
+    width:100%;
+    bottom: 0px;
+    @media only screen and (min-width:$minTablet){
+        width:15.2%;
+        position: absolute;
+        top:72px; right: 0px;
+    }
+    nav{
+        display: none;
+        list-style-type: none;
+        overflow: hidden;
+        padding-top: 12px;
+        @media only screen and (min-width:$minTablet){
+            display: block;
+            padding-top: 41px;
+            position: -webkit-sticky;
+            position: -moz-sticky;
+            position: -ms-sticky;
+            position: -o-sticky;
+            position: sticky;
+            top: 6px;
+        }
+        a{
+            display: block;
+            text-decoration: none;
+            padding: calc(12px + 1vw);
+            font: 20px $ff6;
+            color: $cw;
+            opacity: .8;
+            @media only screen and (min-width:$minTablet){
+                padding: calc(18px + .2vw) 0px;
+                font-size: calc(12px + .4vw);
+                @include tran(text-shadow, .8s, ease-out);
+                &:hover{
+                    opacity: 1;
+                    text-shadow: 0px 0px 28px #fff, 0px 0px 16px #fff;
+                    @include tran(all, 0s, ease);
+                }
+            }
+        }
+    }
+    #upBut1{
+        overflow: hidden;
+        position: fixed;
+        top: calc(400px + 4vw);
+        width: 15%;
+        a{
+            display: none; 
+            @media only screen and (min-width:$minTablet){
+                display: block; 
+                position: relative;
+                left: 100%;
+                transform: translateX(-50%);
+                width: 40px; height: 40px;
+                padding: 10px 0 0 0;
+                background: $c1;
+                border-radius: 50%;
+                opacity: 0;
+                @include tran(all, .38s, ease-out);
+            }
+        }
+        img{
+            width: 48%;
+        }
+    } 
+}
+main{
+    @media only screen and (min-width:$minTablet){
+        width:100%;
+    }
+    .sec1{
+        border: 1px solid $cw;
+        border-radius: $borderRad1;
+        background: $c1L2 !important;
+        margin: calc(6px + 3.1vw) 4vw 16vw 4vw;
+        padding: 6vw 6.02vw 4.4vw 6.02vw;
+        color: $cw;
+        @media only screen and (min-width: $minTablet){
+            margin: 58px 16% 82px 15%;
+            padding: 4vw 4vw 3vw 4vw;
+        }
+        h2{
+            margin: 0 0 calc(9px + 1vw) 0;
+            font-family: $ff7;
+            font-size: calc(6px + 5.2vw);
+            text-align: left;
+            span{
+                color:$cg;
+                &:nth-of-type(1){
+                    display: block;
+                }
+            }
+            @media only screen and (min-width: $minTablet){
+                font-size: 3.1vw;
+                text-align: center;
+                span:nth-of-type(1){
+                    display: initial;
+                }    
+            }
+        }
+        p{
+            @extend .text1;
+            span{color:$cg; font-style:italic;}
+        }
+    }   
+    .topic{
+        &:nth-child(2){background: $c1L2 !important;}
+        &:nth-child(odd){background: linear-gradient($c1L2, $c1L4 4%);}
+        &:nth-child(even){background: linear-gradient($c1L4, $c1L2 4%);}
+        padding: 4vw 4vw 18vw 4vw;
+        text-align: justify;
+        @include fl(row, space-between, center, wrap);
+        @media only screen and (min-width:$minMabileL){
+            padding: 8vw 10vw 18vw 10vw;
+        }
+        @media only screen and (min-width:$minTablet){
+            padding: 64px 16% 82px 15%;
+        }
+        .definition{
+            @extend .text1;
+            span{
+                font: bold 18px $ff6;
+                text-decoration: underline;
+            }
+        }
+        code{
+            width: 100%;
+            border-radius: $borderRad1;
+            margin: calc(30px + 4vw)  auto calc(8px + 1vw) auto;
+            padding: 6vw 0 5.5vw 9vw;
+            background: #222;
+            color: $cg;
+            font-size: calc(3px + 3.7vw);
+            overflow: auto;
+            @media only screen and (min-width:$minMabileL){
+                font-size: calc(4px + 2.8vw);
+            }
+            @media only screen and (min-width:$minTablet){
+                width: 70%;
+                font-size: calc(4px + 2vw);
+                padding: 4vw 5vw;
+            }
+            @media only screen and (min-width:$minDesktop){
+                flex-basis: calc(20vw + 132px);
+                flex-grow: 0;
+                flex-shrink: 0;
+                font-size: calc(9px + .8vw);
+                line-height: calc(11px + 1vw);
+                margin: 68px 0 0 0;
+                padding: 2.2vw 0 2vw 3vw;
+            }
+        }
+        .explanation{
+                font-family: $ff7;
+                font-size: calc(12px + .8vw);
+                line-height: calc(22px + .5vw);
+                color: $cg;
+                span{color: $cw;}
+            @media only screen and (min-width:$minMabileL){
+                font-size: 17px;
+                text-align: justify;
+            }
+            @media only screen and (min-width:$minTablet){
+                width:70%;
+                margin: auto;
+            }
+            @media only screen and (min-width:$minDesktop){
+                line-height: calc(14px + 1vw);
+                flex-basis: 34vw;
+                flex-grow: 10;
+                margin: 68px 0 0 0;
+                padding:0px 0px 0px 3%;
+            }
+        }
+    }
+}
+footer{
+    background: $c1L2;
+    text-align: left;
+    @media only screen and (min-width:$minTablet){
+        padding: 30px 15% 0px 15%;
+    }
+    section{
+        background: $c1;
+        padding: 36px 3vw 30px 3vw;
+        border-radius: 5px 5px 0px 0px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        @media only screen and (min-width:$minTablet){
+            justify-content: space-evenly;
+        }
+        &>*{
+            text-align: center;
+            color: $cw;
+        }
+        form{
+            width: 41px;
+            display: block;
+            text-align: left;
+            @media only screen and (min-width:$minTablet){
+                display: none;
+            }
+        }
+        a{
+            text-decoration: none;
+            font: 16px $ff5;
+            img{width:34px;}
+            &:nth-last-of-type(1){
+                width: 41px;
+                text-align: right;
+            }
+        }
+        p{
+            width: calc(36px + 2vw) ;
+            display: block;
+            @media only screen and (min-width:$minTablet){
+                display: none;
+            }
+        }
+    }
+}
+#upBtn{
+    position: fixed;
+    bottom: -20px; right: 50%;
+    transform: translateX(50%);
+    display: block;
+    border-radius: 20px;
+    width: 40px; height: 40px;
+    background: url("img/up.svg"), rgba(205,103,153,.5);
+	background-repeat:no-repeat;
+	background-position: center center;
+    background-size:50%;
+    opacity: 0;
+    @include tran(all, .38s, ease-out);
+    @media only screen and (min-width:$minTablet){
+        display: none;
+    }
+}
+form{
+    display: none;
+    text-align: center;
+    @media only screen and (min-width:$minTablet){
+        display: block;
+        position: absolute;
+        top:28px; right:1.4vw;
+    }
+}
+select{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    font:bold 13px $ff6;
+    text-align-last:center;
+    background-color: $c1;
+    color: $cw;
+    padding: 0 .8px 0 0;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}

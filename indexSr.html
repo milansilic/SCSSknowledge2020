@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Milan Silic">
+    <title>SCSS znanje</title>
+    <link rel="icon" type="image/png" href="img/sasslogo.png">
+    <link rel="stylesheet" href="fonts/fonts.css">
+    <link rel="stylesheet" href="custom.min.css">
+</head>
+<body>
+<header class="hdr1">
+    <div id="lgSass"><a href="#top"><img src="img/globe.svg"></a></div>
+    <div id="lg1"><a href="index.html"><img src="img/lg2.svg"></a></div>
+    <div id="ham"><img src="img/ham.svg" onclick="showMenu()"></div>
+    <form action="">
+        <select name="sel1" id="sel1">
+            <option value="sr">SR</option>
+            <option value="en">EN</option>
+        </select>
+    </form>
+</header>
+<aside id="aside3">
+    <nav>
+        <a href="#th0">Varijable</a>
+        <a href="#th1">Nesting</a>
+        <a href="#th2">Ekstend</a>
+        <a href="#th3">Miksini</a>
+        <a href="#th4">Miksini()</a>
+    </nav>
+    <div id="upBut1"><a href="#top"><img src="img/up.svg"></a></div>
+</aside>
+<main>
+    <section class="sec1">
+        <h2>SASS <span>Syntactically Awesome</span> <span>Style Sheets</span></h2>
+        <p> 
+            ...je CSS preprocesor koji značajno poboljšava preglednost i funkcionalnost sintakse, 
+            omogućujući kraći i jasniji kod. Novija sintaksa, SCSS <span>Sassy CSS</span> koristi CSS 
+            formatiranje blokova: { } zagrade za blokove koda i tačka-zareze za odvajanje pravila 
+            unutar bloka.
+        </p>
+    </section>
+    <section class="topic" id="th0">
+        <div class="definition">
+            <span>VARIJABLE</span> su imenovane memorijske lokacije za čuvanje vrednosti koje želimo 
+            da upotrebimo više puta. Određivanjem vrednosti u varijabli, određujemo vrednost na svakom 
+            mestu gde smo varijablu upotrebili:
+        </div>
+        <code>
+<pre><span class="codVar">$mojaBoja1</span>: <span class="codVal1">green</span>;</pre>
+        </code>
+        <p class="explanation">
+            <span>Pravimo Varijablu</span> simbolom "$", ispred proizvoljnog imena. 
+            Zatim unosimo vrednost koju će ta varijabla preneti svuda gde bude upotrebljena!
+        </p>
+        <code>
+<pre><span class="codSelTg1">p </span>{
+   <span class="codProp">color</span>: <span class="codVar">$mojaBoja1</span>;
+}</pre>
+        </code>
+        <p class="explanation">
+            <span>Koristimo Varijablu</span> navodeći puno ime varijable umesto same vrednosti za 
+            željeni atribut! U ovom primeru smo atributu "color" preneli vrednost "green".
+        </p>
+    </section>
+    <section class="topic" id="th1">
+        <p class="definition">
+            <span>NESTING</span> je "ugnježđavanje" elemenata koje stilizujemo, direktno u blokove 
+            koda "roditelj" elemenata. Tako postižemo vizuelnu hijerarhiju kao u HTML-u, što nam 
+            olakšava orijentaciju, preglednost i pojednostavljuje kod:
+        </p>
+        <code>
+<pre><span class="codSelTg1">article </span>{
+   <span class="codProp">background</span>: <span class="codVal1">grey</span>;
+   <span class="codSelTg1">p</span> {
+      <span class="codProp">width</span>: <span class="codVal2">400px</span>;
+   }
+}</pre>
+        </code>
+        <p class="explanation">
+            <span>"Ugnjezdili" smo Element</span> "p" u element "article". 
+            Na taj način smo stilizovali samo elemente "p" koji se u HTML-u nalaze u 
+            elementima "article". Vrednost atributa "width" iz primera, neće važiti za 
+            "p" elemente koji se ne nalaze u elementu "article"!
+        </p>
+        <code>
+<pre><span class="codSelTg1">a </span>{
+   <span class="codProp">color</span>: <span class="codVal1">grey</span>;
+   <span class="cCod2">&</span><span class="codSelTg1">:hover </span>{
+      <span class="codProp">color</span>: <span class="codVal1">white</span>;
+   }
+}</pre>
+        </code>
+        <p class="explanation">
+            <span>"Ugnjezdili" smo Pseudo Klasu</span> koristeći simbol "&" koji zamenjuje naziv 
+            selektora u čijem bloku koda se nalazimo. U ovom primeru "&:hover" zapravo znači "a:hover".
+        </p>
+        <code>
+<pre><span class="codSelTg1">main </span>{
+  <span class="codProp">width</span>: <span class="codVal2">100%</span>;
+  <span class="codMedia">@media<span class="fsSM"> screen </span></span>(<span class="codProp">min-width</span>:<span class="codVal2 fsSM">768px</span>)
+    <span class="codProp">width</span>: <span class="codVal2">60%</span>;
+  }
+}</pre>
+        </code>
+        <p class="explanation">
+            <span>"Ugnjezdili" smo Media Query</span> direktno u blok koda elementa na kog delujemo. 
+            Tako imamo jasniju sliku o svim promenama na jednom elementu, u zavisnosti od media query-ja.  
+        </p>
+    </section>
+    <section class="topic" id="th2">
+        <p class="definition">
+            <span>EKSTEND</span> je SASS direktiva koja omogućuje korišćenje svih definisanih 
+            deklaracija jednog selektora, u drugom. Dobijamo manje linija koda jer ne moramo 
+            ponovo unositi deklaracije koje čine jedan blok koda, kada su nam potrebne u drugom.
+        </p>
+        <code>
+<pre><span class="codSelTg1">.button </span>{
+   <span class="codProp">padding</span>: <span class="codVal2">15px 30px</span>;
+   <span class="codProp">text-align</span>: <span class="codVal1">center</span>;
+   <span class="codProp">font-size</span>: <span class="codVal2">16px</span>;
+   <span class="codProp">cursor</span>: <span class="codVal1">pointer</span>;
+}</pre>
+        </code>
+        <p class="explanation">
+            Recimo da klasa "button" <span>sadrži deklaracije</span> koje želimo da budu deo 
+            <span>nekog drugog bloka koda</span>.
+        </p>
+        <code>
+<pre><span class="codSelTg1">.submit </span>{
+   <span class="codMix1">@extend</span> <span class="codSelTg1">.button</span>;
+   <span class="codProp">background-color</span>: <span class="codVal1">green</span>;
+   <span class="codProp">color</span>: <span class="codVal1">white</span>;
+}</pre>
+        </code>
+        <p class="explanation">
+            U bloku koda klase "submit", <span>izrazom "@extend"</span>, praćenim imenom klase "button", 
+            <span>uvozimo sve deklaracije</span> iz klase "button"! Na ovaj način, klasa "submit" će 
+            sadržati sve deklaracije klase "button" + svoje lične.
+        </p>
+    </section>
+    <section class="topic" id="th3">
+        <p class="definition">
+            <span>MIKSIN</span> je SASS direktiva za kreiranje ponovo upotrebljivog bloka koda. 
+            Unutar miksina definišemo određeni stil, kog možemo upotrebljavati više puta. Direktivom 
+            "@include" pozivamo kreirani miksin gde želimo.
+        </p>
+        <code>
+<pre><span class="codMix1">@mixin</span> <span class="codMix3">mojMiksin</span> {
+   <span class="codProp">width</span>: <span class="codVal2">400px</span>;
+   <span class="codProp">background</span>: <span class="codVal1">green</span>;
+}</pre>
+        </code>
+        <p class="explanation">
+            <span>Pravimo miksin</span> izrazom "@mixin" i proizvoljnim imenom miksina. Nakon toga u 
+            vitičastim zagradama određujemo sve deklaracije koje će činiti miksin.
+        </p>
+        <code>
+<pre><span class="codSelTg1">.box </span>{
+   <span class="codMix1">@include</span> <span class="codMix3">mojMiksin</span>;
+   <span class="codProp">font-size</span>: <span class="codVal2">16px</span>;
+}</pre>
+        </code>
+        <p class="explanation">
+            <span>Pozivamo miksin</span> izrazom "@include" nakon kog navodimo 
+            ime miksina. U ovom primeru smo u klasu "box" ubacili deklaracije "width" i "background", 
+            iz miksina "mojMiksin".
+        </p>
+    </section>
+    <section class="topic" id="th4">
+        <div class="definition">
+            <span>MIKSINI()</span> sa argumentima dozvoljavaju da ih modifikujemo svaki put kada ih 
+            pozovemo. Izuzetno su korisni kada želimo da upotrebljavamo iste setove atributa sa 
+            različitim vrednostima, u različitim blokovima koda.
+        </div>
+        <code>
+<pre><span class="codMix1">@mixin</span> <span class="codMix3">mojRadius</span>(<span class="codVar">$vred</span>) {
+  <span class="codProp"><span class="fsSM">-webkit-</span>border-radius</span>: <span class="codVar">$vred</span>;
+  <span class="codProp"><span class="fsSM">-moz-</span>border-radius</span>: <span class="codVar">$vred</span>;
+  <span class="codProp"><span class="fsSM">-o-</span>border-radius</span>: <span class="codVar">$vred</span>;
+  <span class="codProp">border-radius</span>: <span class="codVar">$vred</span>;
+}</pre>
+        </code>
+        <p class="explanation">
+            <span>Pravimo Miksin()</span> sa argumentima standardno, unoseći argument (prenosioc 
+            vrednosti) u obliku varijable, unutar ()zagrada. Koristimo argument iz zagrade umesto 
+            vrednosti atributa u mixinu, koju ćemo odrediti tek kad miksin budemo pozivali.
+        </p>
+        <code>
+<pre><span class="codSelTg1">.box </span>{
+   <span class="codMix1">@include</span> <span class="codMix3">mojRadius</span>(<span class="codVal2">3px</span>);
+}</pre>
+        </code>
+        <p class="explanation">
+            <span>Pozivamo Miksin()</span> sa argumentima standardno, zadajući željenu vrednost u 
+            ()zagrade, koja se prenosi u argument iz ()zagrade miksina, a samim tim i u vrednosti 
+            atributa miskina, gde smo taj argument upotrebili.
+        </p>
+        <code>
+<pre><span class="codMix1">@mixin</span> <span class="codMix3">Fle</span>(<span class="codVar">$juCo</span>, <span class="codVar">$flWr</span>) {
+  <span class="codProp">display</span>: <span class="codVal1">flex</span>;
+  <span class="codProp">justify-content</span>: <span class="codVar">$juCo</span>;
+  <span class="codProp">flex-wrap</span>: <span class="codVar">$flWr</span>;
+}</pre>
+        </code>
+        <p class="explanation">
+            <span>Pravimo mixin() sa više argumenata</span> navodeći ih u zagradama, odvojeno zarezima. 
+            Sada imamo mogućnost da manipulišemo različitim vrednostima za veći broj atributa, svaki 
+            put kada pozivamo miksin.
+        </p>
+        <code>
+<pre><span class="codSelTg1">.container </span>{
+  <span class="codMix1">@include</span> <span class="codMix3">Fle</span>(<span class="codVal1">center</span>, <span class="codVal1">wrap</span>);
+}</pre>
+        </code>
+        <p class="explanation">
+            <span>Pozivamo miksin() sa više argumenata:</span> određujući vrednosti u zagradama, koje 
+            će se istim redosledom prenositi u argumente u zagradi miksina, a samim tim i u vrednosti 
+            odgovarajućih atributa miksina.
+        </p>        
+    </section>
+</main>
+<footer>
+    <section>
+        <form action="">
+            <select name="sel2" id="sel2">
+                <option value="sr">SRPS</option>
+                <option value="en">ENGL</option>
+            </select>
+        </form>
+        <a href="https://www.linkedin.com/in/milansilic/" target="_blank"><img src="img/link2.svg" alt=""></a>
+        <p></p>
+        <a href="https://github.com/milansilic" target="_blank"><img src="img/git1.svg" alt=""></a>
+        <a href="https://www.linkedin.com/in/milansilic/" target="_blank">M.Silic</a>
+    </section>
+</footer>
+<a id="upBtn" href="#top"></a>
+<script src="script/script.js"></script>
+</body>
+</html>

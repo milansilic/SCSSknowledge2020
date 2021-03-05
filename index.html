@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Milan Silic">
+    <title>SCSS knowledge</title>
+    <link rel="icon" type="image/png" href="img/sasslogo.png">
+    <link rel="stylesheet" href="fonts/fonts.css">
+    <link rel="stylesheet" href="custom.min.css">
+</head>
+<body>
+<header class="hdr1">
+    <div id="lgSass"><a href="#top"><img src="img/globe.svg"></a></div>
+    <div id="lg1"><a href="index.html"><img src="img/lg2.svg"></a></div>
+    <div id="ham"><img src="img/ham.svg" onclick="showMenu()"></div>
+    <form action="">
+        <select name="sel1" id="sel1">
+            <option value="en">EN</option>
+            <option value="sr">SR</option>
+        </select>
+    </form>
+</header>
+<aside id="aside3">
+    <nav>
+        <a href="#th0">Variables</a>
+        <a href="#th1">Nesting</a>
+        <a href="#th2">Extend</a>
+        <a href="#th3">Mixins</a>
+        <a href="#th4">Mixins()</a>
+    </nav>
+    <div id="upBut1"><a href="#top"><img src="img/up.svg"></a></div>
+</aside>
+<main>
+    <section class="sec1">
+        <h2>SASS <span>Syntactically Awesome</span> <span>Style Sheets</span></h2>
+        <p> 
+            ...is a CSS preprocessor that significantly improves syntax clarity and functionality, 
+            enabling fewer lines of code. Newer syntax, SCSS <span>Sassy CSS</span> uses CSS block 
+            formatting: { } braces to denote code blocks and semicolons to separate rules within a block.
+        </p>
+    </section>
+    <section class="topic" id="th0">
+        <div class="definition">
+            <span>VARIABLES</span> are named-memory-locations for storing values, often those we want 
+            to use many times. By placing a value inside the variable, we set the same value anywhere 
+            we used that particular variable!
+        </div>
+        <code>
+<pre><span class="codVar">$myColor1</span>: <span class="codVal1">green</span>;</pre>
+        </code>
+        <p class="explanation">
+            We <span>create a Variable</span> by declaring a name ("$" symbol + custom name) and a 
+            value that will be transferred anywhere we "call" that variable.
+        </p>
+        <code>
+<pre><span class="codSelTg1">p </span>{
+   <span class="codProp">color</span>: <span class="codVar">$myColor1</span>;
+}</pre>
+        </code>
+        <p class="explanation">
+            We <span>use a Variable</span> by writing full variable name instead of value within the 
+            declaration. In this example we "passed" the value "green" to the property "color".
+        </p>
+    </section>
+    <section class="topic" id="th1">
+        <p class="definition">
+            <span>NESTING</span> is a possibility to place a set of rules of an element, directly 
+            inside a set of rules of their parent element. With this we achieve HTML visual hierarchy, 
+            which provides better orientation, visualisation and cleaner code.
+        </p>
+        <code>
+<pre><span class="codSelTg1">article </span>{
+   <span class="codProp">background</span>: <span class="codVal1">grey</span>;
+   <span class="codSelTg1">p</span> {
+      <span class="codProp">width</span>: <span class="codVal2">400px</span>;
+   }
+}</pre>
+        </code>
+        <p class="explanation">
+            <span>Nesting an Element</span> "p" inside element "article". We refered to all "p" 
+            elements that are descendants of any "article" element in the HTML code. "Width" value 
+            from the example won't apply to "p" elements outside the "article" elements.
+        </p>
+        <code>
+<pre><span class="codSelTg1">a </span>{
+   <span class="codProp">color</span>: <span class="codVal1">grey</span>;
+   <span class="cCod2">&</span><span class="codSelTg1">:hover </span>{
+      <span class="codProp">color</span>: <span class="codVal1">white</span>;
+   }
+}</pre>
+        </code>
+        <p class="explanation">
+            <span>Nesting a Pseudo Class</span> using symbol "&" which replace the name of the selector 
+            we are in. In this example "&:hover" is actually compiled to "a:hover".
+        </p>
+        <code>
+<pre><span class="codSelTg1">main </span>{
+  <span class="codProp">width</span>: <span class="codVal2">100%</span>;
+  <span class="codMedia">@media<span class="fsSM"> screen </span></span>(<span class="codProp">min-width</span>:<span class="codVal2 fsSM">768px</span>)
+    <span class="codProp">width</span>: <span class="codVal2">60%</span>;
+  }
+}</pre>
+        </code>
+        <p class="explanation">
+            <span>Nesting a Media Query</span> directly into the block of code of an element we want 
+            to affect. This way we have a better view of how one element changes, depending on media 
+            queries. 
+        </p>
+    </section>
+    <section class="topic" id="th2">
+        <p class="definition">
+            <span>EXTEND</span> is a SASS directive that allows us to use all defined declarations of 
+            one selector, into another. We get fewer lines of code because there is no need to repeat 
+            declarations that make up one code block, when we need to use them in another.
+        </p>
+        <code>
+<pre><span class="codSelTg1">.button </span>{
+   <span class="codProp">padding</span>: <span class="codVal2">15px 30px</span>;
+   <span class="codProp">text-align</span>: <span class="codVal1">center</span>;
+   <span class="codProp">font-size</span>: <span class="codVal2">16px</span>;
+   <span class="codProp">cursor</span>: <span class="codVal1">pointer</span>;
+}</pre>
+        </code>
+        <p class="explanation">
+            For example, <span>the set of declarations we want to use multiple times</span> iz 
+            located in the class "button".
+        </p>
+        <code>
+<pre><span class="codSelTg1">.submit </span>{
+   <span class="codMix1">@extend</span> <span class="codSelTg1">.button</span>;
+   <span class="codProp">background-color</span>: <span class="codVal1">green</span>;
+   <span class="codProp">color</span>: <span class="codVal1">white</span>;
+}</pre>
+        </code>
+        <p class="explanation">
+            Inside class "submit" code block, <span>we import all declarations</span> from class 
+            "button" <span>using expression "@extend"</span>, followed by the name of class "button". 
+            This way, class "submit" will contain all declarations from class "button" + its own.
+        </p>
+    </section>
+    <section class="topic" id="th3">
+        <p class="definition">
+            <span>MIXIN</span> is a SASS directive for making reuseable code blocks. Inside a mixin 
+            we can define particular style once, which can be used multiple times. To use or "call" 
+            created mixin, we use "@include" directive.
+        </p>
+        <code>
+<pre><span class="codMix1">@mixin</span> <span class="codMix3">myMixin1</span> {
+   <span class="codProp">width</span>: <span class="codVal2">400px</span>;
+   <span class="codProp">background</span>: <span class="codVal1">green</span>;
+}</pre>
+        </code>
+        <p class="explanation">
+            We <span>create a Mixin</span> by "@mixin" directive and a custom mixin name. Inside curly 
+            braces we define all the declarations that will constitute a mixin.
+        </p>
+        <code>
+<pre><span class="codSelTg1">.box </span>{
+   <span class="codMix1">@include</span> <span class="codMix3">myMixin1</span>;
+   <span class="codProp">font-size</span>: <span class="codVal2">16px</span>;
+}</pre>
+        </code>
+        <p class="explanation">
+            We <span>call a Mixin</span> by "@include" directive, followed by a mixin name. In this 
+            example we imported declarations "width" and "background" from the mixin "myMixin1", into 
+            the class "box".
+        </p>
+    </section>
+    <section class="topic" id="th4">
+        <div class="definition">
+            <span>MIXINS()</span> with arguments alow us to modify them every time we call them. They 
+            are extremely convenient when we want to use same sets of atributes with different values, 
+            inside different code blocks.
+        </div>
+        <code>
+<pre><span class="codMix1">@mixin</span> <span class="codMix3">myRadius1</span>(<span class="codVar">$vred</span>) {
+  <span class="codProp"><span class="fsSM">-webkit-</span>border-radius</span>: <span class="codVar">$vred</span>;
+  <span class="codProp"><span class="fsSM">-moz-</span>border-radius</span>: <span class="codVar">$vred</span>;
+  <span class="codProp"><span class="fsSM">-o-</span>border-radius</span>: <span class="codVar">$vred</span>;
+  <span class="codProp">border-radius</span>: <span class="codVar">$vred</span>;
+}</pre>
+        </code>
+        <p class="explanation">
+            We <span>create a Mixin()</span> with arguments as usual, and enter an argument inside 
+            parentheses, in the form of variable. We use arguments from the parentheses, instead of 
+            mixin property values that we want to set later, when we call a mixin.
+        </p>
+        <code>
+<pre><span class="codSelTg1">.box </span>{
+   <span class="codMix1">@include</span> <span class="codMix3">myRadius1</span>(<span class="codVal2">3px</span>);
+}</pre>
+        </code>
+        <p class="explanation">
+            We <span>call a Mixin()</span> with arguments as usual, and set a value inside ()prentesies, which will be 
+            transfered to the argument inside mixin ()prentesies, and into mixin atributes, where we 
+            used that argument.
+        </p>
+        <code>
+<pre><span class="codMix1">@mixin</span> <span class="codMix3">Fle</span>(<span class="codVar">$juCo</span>, <span class="codVar">$flWr</span>) {
+  <span class="codProp">display</span>: <span class="codVal1">flex</span>;
+  <span class="codProp">justify-content</span>: <span class="codVar">$juCo</span>;
+  <span class="codProp">flex-wrap</span>: <span class="codVar">$flWr</span>;
+}</pre>
+        </code>
+        <p class="explanation">
+            We <span>create a Mixin() with multiple arguments</span> by declaring them in parentheses, 
+            separated by commas. Now we have the ability to manipulate various values for multiple 
+            attributes, every time we call a mixin!
+        </p>
+        <code>
+<pre><span class="codSelTg1">.container </span>{
+  <span class="codMix1">@include</span> <span class="codMix3">Fle</span>(<span class="codVal1">center</span>, <span class="codVal1">wrap</span>);
+}</pre>
+        </code>
+        <p class="explanation">
+            We <span>call a mixin() with multiple parameters</span> by seting the values in parentheses, 
+            which will be transferred in the same order to the arguments in mixin parentheses, and into 
+            mixin atributes, where we used that arguments.
+        </p>        
+    </section>
+</main>
+<footer>
+    <section>
+        <form action="">
+            <select name="sel2" id="sel2">
+                <option value="en">ENGL</option>
+                <option value="sr">SERB</option>
+            </select>
+        </form>
+        <a href="https://www.linkedin.com/in/milansilic/" target="_blank"><img src="img/link2.svg" alt=""></a>
+        <p></p>
+        <a href="https://github.com/milansilic" target="_blank"><img src="img/git1.svg" alt=""></a>
+        <a href="https://www.linkedin.com/in/milansilic/" target="_blank">M.Silic</a>
+    </section>
+</footer>
+<a id="upBtn" href="#top"></a>
+<script src="script/script.js"></script>
+</body>
+</html>
